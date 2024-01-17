@@ -6,6 +6,7 @@ class Obuparse < Formula
   license "ISC"
   head "https://github.com/dwbuiten/obuparse.git", branch: "master"
 
+
   patch :DATA if OS.mac?
 
   def install
