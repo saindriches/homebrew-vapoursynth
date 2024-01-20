@@ -4,6 +4,7 @@ class LSmash < Formula
   url "https://github.com/vimeo/l-smash/archive/refs/tags/v2.18.0.tar.gz"
   sha256 "9a2ae612e3d84116225725013cda2a6e996f65767d923fc07bb67025de9d2215"
   license "ISC"
+  revision 1
   head "https://github.com/vimeo/l-smash.git", branch: "master"
 
   bottle do
@@ -16,7 +17,9 @@ class LSmash < Formula
   depends_on "saindriches/vapoursynth/obuparse"
 
   def install
-    system "./configure", "--prefix=#{prefix}"
+    ENV.append_to_cflags "-fPIC" if OS.linux?
+
+    system "./configure", "--prefix=#{prefix}", "--extra-cflags=#{ENV.cflags}"
     system "make", "install"
   end
 end
